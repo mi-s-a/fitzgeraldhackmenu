@@ -1,14 +1,11 @@
 #include "pch.h"
-
 #include "auth.h"
-
 #include "debug_console.h"
 #include "il2cpp_resolver_integration.h"
-
 #include <algorithm>
 #include <atomic>
 #include <string>
-
+#include <fstream> // Required for file operations
 #include <Unity/Structures/il2cpp.hpp>
 #include <Unity/Structures/System_String.hpp>
 #include <Unity/Structures/il2cppArray.hpp>
@@ -82,7 +79,39 @@ namespace
 
 namespace fitzgeraldhackmenu {
     std::string accountid = "1";
+
+    // Helper function to handle the file logic
+    void LoadOrSaveAccountId() {
+        std::fstream file("accountid.txt", std::ios::in);
+
+        if (file.is_open()) {
+            // File exists, read the contents into accountid
+            std::string tempId;
+            if (std::getline(file, tempId) && !tempId.empty()) {
+                accountid = tempId;
+                Log("Loaded Account ID from file: %s", accountid.c_str());
+            }
+            file.close();
+        }
+        else {
+            // File does not exist, create it and write the default accountid
+            file.clear();
+            file.open("accountid.txt", std::ios::out);
+            if (file.is_open()) {
+                file << accountid;
+                file.close();
+                Log("Created accountid.txt with default ID: %s", accountid.c_str());
+            }
+            else {
+                Log("Failed to create accountid.txt");
+            }
+        }
+    }
+
     void install() {
+        // Initialize the account ID from the text file before doing anything else
+        LoadOrSaveAccountId();
+
         bool expected = false;
         if (!g_roomIdLoggerInstalled.compare_exchange_strong(expected, true))
         {
@@ -91,7 +120,7 @@ namespace fitzgeraldhackmenu {
 
         void* target = ResolveIl2CppMethodPointer("CGCEKBCIHJC", "PPGFHEDFBEA", 1);
         if (!target) return;
-        if (!target) return;
+
         const MH_STATUS initStatus = MH_Initialize();
         if (initStatus != MH_OK && initStatus != MH_ERROR_ALREADY_INITIALIZED)
             return;
