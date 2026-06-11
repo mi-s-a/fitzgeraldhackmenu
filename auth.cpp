@@ -16,10 +16,6 @@
 #include <MinHook.h>
 #include <IL2CPP_Resolver.hpp>
 
-namespace but {
-    extern struct { std::string Value; } accountid;
-}
-
 namespace
 {
     using RoomDictionary = Unity::il2cppDictionary<Unity::System_String*, Unity::il2cppObject*>;
@@ -63,7 +59,7 @@ namespace
             const std::string preview = previewit(key, value);
             if (key == "AccountId")
             {
-                Unity::System_String* managedStr = IL2CPP::String::New(but::accountid.Value.c_str());
+                Unity::System_String* managedStr = IL2CPP::String::New(fitzgeraldhackmenu::accountid);
                 entry.m_tValue = reinterpret_cast<Unity::il2cppObject*>(managedStr);
             }
             else if (key == "Role" || key == "InvitedRole")
