@@ -26,6 +26,8 @@ namespace
     ID3D11RenderTargetView* g_renderTargetView = nullptr;
     bool g_loggedFirstPresent = false;
     bool g_loggedFirstRender = false;
+    bool g_cursorUnlocked = false;
+    bool g_lastMenuVisible = false;
 
     const char* KieroStatusToString(kiero::Status::Enum status)
     {
@@ -74,11 +76,68 @@ namespace
         return SUCCEEDED(result);
     }
 
+    void SetCursorVisible(bool visible)
+    {
+        if (visible)
+        {
+            while (ShowCursor(TRUE) < 0)
+            {
+            }
+            return;
+        }
+
+        while (ShowCursor(FALSE) >= 0)
+        {
+        }
+    }
+
+    RECT GetClientScreenRect(HWND window)
+    {
+        RECT rect = {};
+        GetClientRect(window, &rect);
+
+        POINT topLeft = { rect.left, rect.top };
+        POINT bottomRight = { rect.right, rect.bottom };
+        ClientToScreen(window, &topLeft);
+        ClientToScreen(window, &bottomRight);
+
+        rect.left = topLeft.x;
+        rect.top = topLeft.y;
+        rect.right = bottomRight.x;
+        rect.bottom = bottomRight.y;
+        return rect;
+    }
+
+    void ApplyCursorState(bool menuVisible)
+    {
+        if (g_window == nullptr || g_cursorUnlocked == menuVisible)
+        {
+            return;
+        }
+
+        if (menuVisible)
+        {
+            ReleaseCapture();
+            ClipCursor(nullptr);
+            SetCursorVisible(true);
+            g_cursorUnlocked = true;
+            fitzgeraldhackmenu::Log("cursor unlocked for menu");
+            return;
+        }
+
+        const RECT clipRect = GetClientScreenRect(g_window);
+        ClipCursor(&clipRect);
+        SetCursorVisible(false);
+        g_cursorUnlocked = false;
+        fitzgeraldhackmenu::Log("cursor locked to game window");
+    }
+
     LRESULT CALLBACK HookedWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         if (message == WM_KEYUP && wParam == VK_INSERT)
         {
             fitzgeraldhackmenu::SetImGuiOverlayVisible(!fitzgeraldhackmenu::IsImGuiOverlayVisible());
+            ApplyCursorState(fitzgeraldhackmenu::IsImGuiOverlayVisible());
             fitzgeraldhackmenu::Log("Insert pressed, overlay visible=%s", fitzgeraldhackmenu::IsImGuiOverlayVisible() ? "true" : "false");
             return 0;
         }
@@ -128,6 +187,8 @@ namespace
 
         const bool initialized = fitzgeraldhackmenu::InitializeImGuiOverlay(g_window, g_device, g_deviceContext);
         fitzgeraldhackmenu::Log("InitializeImGuiOverlay=%s", initialized ? "true" : "false");
+        g_lastMenuVisible = fitzgeraldhackmenu::IsImGuiOverlayVisible();
+        ApplyCursorState(g_lastMenuVisible);
         return initialized;
     }
 
@@ -141,6 +202,13 @@ namespace
 
         if (InitializeFromSwapChain(swapChain))
         {
+            const bool menuVisible = fitzgeraldhackmenu::IsImGuiOverlayVisible();
+            if (menuVisible != g_lastMenuVisible)
+            {
+                ApplyCursorState(menuVisible);
+                g_lastMenuVisible = menuVisible;
+            }
+
             if (g_renderTargetView == nullptr)
             {
                 CreateRenderTarget(swapChain);
@@ -223,6 +291,11 @@ namespace fitzgeraldhackmenu
 
         Log("stopping DX11 ImGui hook");
         g_stopRequested = true;
+
+        if (g_cursorUnlocked)
+        {
+            ApplyCursorState(false);
+        }
 
         ShutdownImGuiOverlay();
 
