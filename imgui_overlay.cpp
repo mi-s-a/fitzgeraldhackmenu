@@ -45,59 +45,116 @@ namespace
         }
     }
 
-    void SetupStyle() {
+    void SetupStyle()
+    {
         ImGuiStyle& style = ImGui::GetStyle();
+
+        // Layout
         style.WindowPadding = ImVec2(14.0f, 12.0f);
         style.FramePadding = ImVec2(9.0f, 5.0f);
         style.ItemSpacing = ImVec2(10.0f, 8.0f);
         style.ItemInnerSpacing = ImVec2(8.0f, 6.0f);
         style.ScrollbarSize = 12.0f;
-        style.WindowRounding = 4.0f;
-        style.ChildRounding = 4.0f;
-        style.FrameRounding = 3.0f;
-        style.PopupRounding = 3.0f;
-        style.ScrollbarRounding = 3.0f;
-        style.GrabRounding = 3.0f;
+
+        // Rounding
+        style.WindowRounding = 8.0f;
+        style.ChildRounding = 8.0f;
+        style.FrameRounding = 6.0f;
+        style.PopupRounding = 8.0f;
+        style.ScrollbarRounding = 8.0f;
+        style.GrabRounding = 6.0f;
+
+        // Borders
         style.WindowBorderSize = 1.0f;
         style.ChildBorderSize = 1.0f;
         style.FrameBorderSize = 1.0f;
 
         ImVec4* colors = style.Colors;
-        colors[ImGuiCol_Text] = ImVec4(0.88f, 0.91f, 0.92f, 1.00f);
-        colors[ImGuiCol_TextDisabled] = ImVec4(0.42f, 0.47f, 0.49f, 1.00f);
-        colors[ImGuiCol_WindowBg] = ImVec4(0.07f, 0.08f, 0.09f, 0.96f);
-        colors[ImGuiCol_ChildBg] = ImVec4(0.10f, 0.11f, 0.12f, 0.94f);
-        colors[ImGuiCol_PopupBg] = ImVec4(0.08f, 0.09f, 0.10f, 0.98f);
-        colors[ImGuiCol_Border] = ImVec4(0.18f, 0.21f, 0.23f, 1.00f);
+
+        // Text
+        colors[ImGuiCol_Text] = ImVec4(0.95f, 0.95f, 0.96f, 1.00f);
+        colors[ImGuiCol_TextDisabled] = ImVec4(0.55f, 0.55f, 0.58f, 1.00f);
+
+        // Backgrounds
+        colors[ImGuiCol_WindowBg] = ImVec4(0.09f, 0.09f, 0.10f, 1.00f);
+        colors[ImGuiCol_ChildBg] = ImVec4(0.11f, 0.11f, 0.12f, 1.00f);
+        colors[ImGuiCol_PopupBg] = ImVec4(0.12f, 0.12f, 0.13f, 1.00f);
+
+        // Borders
+        colors[ImGuiCol_Border] = ImVec4(0.25f, 0.25f, 0.27f, 1.00f);
         colors[ImGuiCol_BorderShadow] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-        colors[ImGuiCol_FrameBg] = ImVec4(0.13f, 0.15f, 0.16f, 1.00f);
-        colors[ImGuiCol_FrameBgHovered] = ImVec4(0.16f, 0.20f, 0.22f, 1.00f);
-        colors[ImGuiCol_FrameBgActive] = ImVec4(0.08f, 0.32f, 0.38f, 1.00f);
-        colors[ImGuiCol_TitleBg] = ImVec4(0.08f, 0.09f, 0.10f, 1.00f);
-        colors[ImGuiCol_TitleBgActive] = ImVec4(0.09f, 0.11f, 0.12f, 1.00f);
-        colors[ImGuiCol_CheckMark] = ImVec4(0.00f, 0.82f, 0.95f, 1.00f);
-        colors[ImGuiCol_SliderGrab] = ImVec4(0.00f, 0.70f, 0.82f, 1.00f);
-        colors[ImGuiCol_SliderGrabActive] = ImVec4(0.00f, 0.90f, 1.00f, 1.00f);
-        colors[ImGuiCol_Button] = ImVec4(0.13f, 0.16f, 0.17f, 1.00f);
-        colors[ImGuiCol_ButtonHovered] = ImVec4(0.17f, 0.22f, 0.24f, 1.00f);
-        colors[ImGuiCol_ButtonActive] = ImVec4(0.05f, 0.42f, 0.50f, 1.00f);
-        colors[ImGuiCol_Header] = ImVec4(0.12f, 0.19f, 0.21f, 1.00f);
-        colors[ImGuiCol_HeaderHovered] = ImVec4(0.15f, 0.28f, 0.31f, 1.00f);
-        colors[ImGuiCol_HeaderActive] = ImVec4(0.06f, 0.42f, 0.50f, 1.00f);
-        colors[ImGuiCol_Separator] = ImVec4(0.18f, 0.22f, 0.24f, 1.00f);
-        colors[ImGuiCol_SeparatorHovered] = ImVec4(0.00f, 0.70f, 0.82f, 1.00f);
-        colors[ImGuiCol_SeparatorActive] = ImVec4(0.00f, 0.86f, 1.00f, 1.00f);
-        colors[ImGuiCol_ResizeGrip] = ImVec4(0.00f, 0.70f, 0.82f, 0.22f);
-        colors[ImGuiCol_ResizeGripHovered] = ImVec4(0.00f, 0.70f, 0.82f, 0.48f);
-        colors[ImGuiCol_ResizeGripActive] = ImVec4(0.00f, 0.86f, 1.00f, 0.80f);
+
+        // Frames / Inputs
+        colors[ImGuiCol_FrameBg] = ImVec4(0.14f, 0.14f, 0.15f, 1.00f);
+        colors[ImGuiCol_FrameBgHovered] = ImVec4(0.18f, 0.18f, 0.20f, 1.00f);
+        colors[ImGuiCol_FrameBgActive] = ImVec4(0.24f, 0.24f, 0.26f, 1.00f);
+
+        // Title Bars
+        colors[ImGuiCol_TitleBg] = ImVec4(0.07f, 0.07f, 0.08f, 1.00f);
+        colors[ImGuiCol_TitleBgActive] = ImVec4(0.10f, 0.10f, 0.11f, 1.00f);
+        colors[ImGuiCol_TitleBgCollapsed] = ImVec4(0.07f, 0.07f, 0.08f, 1.00f);
+
+        // Menu Bar
+        colors[ImGuiCol_MenuBarBg] = ImVec4(0.11f, 0.11f, 0.12f, 1.00f);
+
+        // Scrollbars
+        colors[ImGuiCol_ScrollbarBg] = ImVec4(0.08f, 0.08f, 0.09f, 1.00f);
+        colors[ImGuiCol_ScrollbarGrab] = ImVec4(0.45f, 0.45f, 0.48f, 1.00f);
+        colors[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.65f, 0.65f, 0.68f, 1.00f);
+        colors[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.90f, 0.90f, 0.92f, 1.00f);
+
+        // Checkboxes
+        colors[ImGuiCol_CheckMark] = ImVec4(0.95f, 0.95f, 0.95f, 1.00f);
+
+        // Sliders
+        colors[ImGuiCol_SliderGrab] = ImVec4(0.75f, 0.75f, 0.78f, 1.00f);
+        colors[ImGuiCol_SliderGrabActive] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
+
+        // Buttons
+        colors[ImGuiCol_Button] = ImVec4(0.16f, 0.16f, 0.17f, 1.00f);
+        colors[ImGuiCol_ButtonHovered] = ImVec4(0.22f, 0.22f, 0.24f, 1.00f);
+        colors[ImGuiCol_ButtonActive] = ImVec4(0.32f, 0.32f, 0.34f, 1.00f);
+
+        // Headers / TreeNodes / Selectables
+        colors[ImGuiCol_Header] = ImVec4(0.18f, 0.18f, 0.20f, 1.00f);
+        colors[ImGuiCol_HeaderHovered] = ImVec4(0.28f, 0.28f, 0.30f, 1.00f);
+        colors[ImGuiCol_HeaderActive] = ImVec4(0.40f, 0.40f, 0.42f, 1.00f);
+
+        // Separators
+        colors[ImGuiCol_Separator] = ImVec4(0.25f, 0.25f, 0.27f, 1.00f);
+        colors[ImGuiCol_SeparatorHovered] = ImVec4(0.65f, 0.65f, 0.68f, 1.00f);
+        colors[ImGuiCol_SeparatorActive] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
+
+        // Resize Grip
+        colors[ImGuiCol_ResizeGrip] = ImVec4(0.75f, 0.75f, 0.78f, 0.20f);
+        colors[ImGuiCol_ResizeGripHovered] = ImVec4(0.90f, 0.90f, 0.92f, 0.50f);
+        colors[ImGuiCol_ResizeGripActive] = ImVec4(1.00f, 1.00f, 1.00f, 0.90f);
+
+        // Plots
+        colors[ImGuiCol_PlotLines] = ImVec4(0.85f, 0.85f, 0.88f, 1.00f);
+        colors[ImGuiCol_PlotLinesHovered] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
+
+        colors[ImGuiCol_PlotHistogram] = ImVec4(0.85f, 0.85f, 0.88f, 1.00f);
+        colors[ImGuiCol_PlotHistogramHovered] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
+
+        // Selection
+        colors[ImGuiCol_TextSelectedBg] = ImVec4(0.85f, 0.85f, 0.90f, 0.25f);
+
+        // Misc
+        colors[ImGuiCol_DragDropTarget] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
+
+        colors[ImGuiCol_NavHighlight] = ImVec4(0.85f, 0.85f, 0.90f, 0.60f);
+        colors[ImGuiCol_NavWindowingHighlight] = ImVec4(1.00f, 1.00f, 1.00f, 0.70f);
+        colors[ImGuiCol_NavWindowingDimBg] = ImVec4(0.20f, 0.20f, 0.20f, 0.20f);
+        colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.05f, 0.05f, 0.05f, 0.60f);
     }
 
     bool NavButton(const char* label, MenuTab tab) {
         const bool selected = g_activeTab == tab;
         if (selected) {
-            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.03f, 0.32f, 0.38f, 1.00f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.05f, 0.38f, 0.45f, 1.00f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.04f, 0.45f, 0.53f, 1.00f));
+            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.16f, 0.16f, 0.17f, 1.00f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.22f, 0.22f, 0.24f, 1.00f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.32f, 0.32f, 0.34f, 1.00f));
         }
         const bool clicked = ImGui::Button(label, ImVec2(-1.0f, 34.0f));
         if (selected) {
@@ -108,7 +165,7 @@ namespace
             ImGui::GetWindowDrawList()->AddRectFilled(
                 ImVec2(min.x, min.y + 5.0f),
                 ImVec2(min.x + 3.0f, max.y - 5.0f),
-                ImGui::GetColorU32(ImVec4(0.00f, 0.86f, 1.00f, 1.00f)),
+                ImGui::GetColorU32(ImVec4(0.33f, 0.33f, 0.35f, 1.00f)),
                 1.5f);
         }
         if (clicked) {
@@ -135,48 +192,48 @@ namespace
 
     void renderplaceholder1() {
         const float halfWidth = (ImGui::GetContentRegionAvail().x - ImGui::GetStyle().ItemSpacing.x) * 0.5f;
-        BeginSection("baja", ImVec2(halfWidth, 0.0f));
+        BeginSection("main", ImVec2(halfWidth, 0.0f));
         ImGui::Checkbox("menu", &g_settings.enabled);
         ImGui::Checkbox("placeholder", &g_settings.placeholderb);
         ImGui::Spacing();
         if (ImGui::Button("resolveing", ImVec2(-1.0f, 0.0f))) {
-            fitzgeraldhackmenu::StartIl2CppResolverInitialization();
+            
         }
         EndSection();
     }
 
     void renderplaceholder2(){
         const float halfWidth = (ImGui::GetContentRegionAvail().x - ImGui::GetStyle().ItemSpacing.x) * 0.5f;
-        BeginSection("jaja", ImVec2(halfWidth, 0.0f));
+        BeginSection("visuals", ImVec2(halfWidth, 0.0f));
         ImGui::SliderFloat("placeholder", &g_settings.placeholderf, 20.0f, 500.0f, "%.0f px");
         EndSection();
     }
 
     void renderplaceholder3() {
-        BeginSection("setting", ImVec2(0.0f, 0.0f));
+        BeginSection("misc", ImVec2(0.0f, 0.0f));
         KeybindPlaceholder("key", g_settings.menuKey);
         EndSection();
     }
 
     void RenderMenu() {
-        ImGui::SetNextWindowSize(ImVec2(700.0f, 500.0f), ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowSize(ImVec2(850.0f, 511.0f), ImGuiCond_FirstUseEver);
         const ImGuiWindowFlags flags =
             ImGuiWindowFlags_NoCollapse |
             ImGuiWindowFlags_NoScrollbar |
             ImGuiWindowFlags_NoScrollWithMouse;
 
-        if (!ImGui::Begin("fitzgerald HACK menu", &g_visible, flags))
+        if (!ImGui::Begin("fitzgerald.lol", &g_visible, flags))
         {
             ImGui::End();
             return;
         }
         ImGui::BeginChild("Navigation", ImVec2(128.0f, 0.0f), true);
-        ImGui::TextUnformatted("fitzelgeral");
+        ImGui::TextUnformatted("tabs");
         ImGui::Separator();
         ImGui::Spacing();
-        NavButton("placeholder1", MenuTab::Main);
-        NavButton("placeholder2", MenuTab::Visuals);
-        NavButton("placeholder3", MenuTab::Misc);
+        NavButton("main", MenuTab::Main);
+        NavButton("visuals", MenuTab::Visuals);
+        NavButton("misc", MenuTab::Misc);
         ImGui::EndChild();
         ImGui::SameLine();
         ImGui::BeginChild("Content", ImVec2(0.0f, 0.0f), false);
@@ -210,6 +267,7 @@ namespace fitzgeraldhackmenu {
         ImGui::CreateContext();
         ImGuiIO& io = ImGui::GetIO();
         io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+        io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\consola.ttf", 13.0f);
         SetupStyle();
         if (!ImGui_ImplWin32_Init(hwnd)) {
             ImGui::DestroyContext();

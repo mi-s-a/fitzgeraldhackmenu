@@ -66,7 +66,7 @@ namespace fitzgeraldhackmenu
         printf("                |___/\n\n");
         printf("++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
         printf("              meow.net 2021 menu\n");
-        printf("             by fitzgerald & misa\n");
+        printf("             by fitzgerald & zion\n");
         printf("++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 
         SetConsoleTextAttribute(console, previousAttributes);
