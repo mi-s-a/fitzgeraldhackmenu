@@ -15,6 +15,7 @@ namespace
 {
     bool g_initialized = false;
     bool g_visible = true;
+    std::string accountid;
     enum class MenuTab {
         Main,
         Visuals,

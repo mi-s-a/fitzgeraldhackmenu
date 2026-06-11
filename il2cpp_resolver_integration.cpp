@@ -48,6 +48,11 @@ namespace fitzgeraldhackmenu
         return true;
     }
 
+    Unity::System_String* NewIl2CppString(const char* text)
+    {
+        return IL2CPP::String::New(text);
+    }
+
     void StartIl2CppResolverInitialization()
     {
         bool expected = false;

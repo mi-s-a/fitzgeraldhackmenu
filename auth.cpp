@@ -14,7 +14,6 @@
 #include <Unity/Structures/il2cppArray.hpp>
 #include <Unity/Structures/il2cppDictionary.hpp>
 #include <MinHook.h>
-#include <IL2CPP_Resolver.hpp>
 
 namespace
 {
@@ -59,7 +58,7 @@ namespace
             const std::string preview = previewit(key, value);
             if (key == "AccountId")
             {
-                Unity::System_String* managedStr = IL2CPP::String::New(fitzgeraldhackmenu::accountid);
+                Unity::System_String* managedStr = fitzgeraldhackmenu::NewIl2CppString(fitzgeraldhackmenu::accountid.c_str());
                 entry.m_tValue = reinterpret_cast<Unity::il2cppObject*>(managedStr);
             }
             else if (key == "Role" || key == "InvitedRole")
@@ -82,6 +81,7 @@ namespace
 }
 
 namespace fitzgeraldhackmenu {
+    std::string accountid = "1";
     void install() {
         bool expected = false;
         if (!g_roomIdLoggerInstalled.compare_exchange_strong(expected, true))
