@@ -8,7 +8,6 @@
 #include <imgui_impl_dx11.h>
 #include <imgui_impl_win32.h>
 #include "auth.h"
-#include <IL2CPP_Resolver.hpp>
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
@@ -206,42 +205,22 @@ namespace
         }
         ImGui::Spacing();
         if (ImGui::Button("Test", ImVec2(-1.0f, 0.0f))) {
-            // 1. Convert "yo" to an IL2CPP-compatible Unity string
-// Sneakyevil's resolver includes a built-in wrapper or you can use your custom fitzgeraldhackmenu function:
             Unity::System_String* yoStr = fitzgeraldhackmenu::NewIl2CppString("yo");
+            auto objects = fitzgeraldhackmenu::FindIl2CppComponents("MultiPlayerEditableText");
 
-            // 2. Fetch all components/objects matching the "MultiPlayerEditableText" class
-            // Sneakyevil uses the exact class name string as the argument inside FindObjectsOfType
-            auto m_pObjects = Unity::Object::FindObjectsOfType<Unity::CComponent>("MultiPlayerEditableText");
-
-            if (m_pObjects != nullptr)
+            for (void* component : objects)
             {
-                // 3. Loop through sneakyevil's array structure using m_uMaxLength and m_pValues
-                for (uintptr_t u = 0U; m_pObjects->m_uMaxLength > u; ++u)
+                if (!component)
+                    continue;
+
+                int numMessages = fitzgeraldhackmenu::GetComponentInt(component, "numberOfSerializedMessages");
+
+                for (int i = 0; i < numMessages; i++)
                 {
-                    Unity::CComponent* l = m_pObjects->m_pValues[u];
-                    if (!l) continue; // Safety check in case of a null entry
-
-                    // 4. Retrieve the integer field "numberOfSerializedMessages"
-                    // Sneakyevil's API uses GetMemberValue<T>("FieldName")
-                    int numMessages = l->GetMemberValue<int>("numberOfSerializedMessages");
-
-                    // 5. Execute the inner loop for the dynamic method call
-                    for (int i = 0; i < numMessages; i++)
-                    {
-                        // Build the args array. 
-                        // In C++, value types (like integers) must be passed by pointer (&i)
-                        // Reference types (like strings/objects) are passed directly
-                        void* args[] = { &i, yoStr };
-
-                        // Call the obfuscated method NGCEMOGHDOD(int, string)
-                        // Template defines the return type (void)
-                        l->CallMethod<void>("NGCEMOGHDOD", args);
-                    }
-
-                    // 6. Set the "defaultMessage" field to "yo" using SetMemberValue<T>
-                    l->SetMemberValue<Unity::System_String*>("defaultMessage", yoStr);
+                    fitzgeraldhackmenu::CallComponentMethodWithInt(component, "NGCEMOGHDOD", i, yoStr);
                 }
+
+                fitzgeraldhackmenu::SetComponentString(component, "defaultMessage", yoStr);
             }
         }
         EndSection();

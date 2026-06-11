@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <vector>
 
 namespace Unity
 {
@@ -18,9 +19,14 @@ namespace fitzgeraldhackmenu
     };
 
     bool InitializeIl2CppResolver(bool waitForGameAssembly = true, int maxSecondsWait = 60);
+    std::vector<void*> FindIl2CppComponents(const char* typeName);
     void StartIl2CppResolverInitialization();
     void* ResolveIl2CppMethodPointer(const char* className, const char* methodName, int argumentCount = -1);
     Il2CppResolverState GetIl2CppResolverState();
     std::uint64_t GetIl2CppUpdateTickCount();
     Unity::System_String* NewIl2CppString(const char* text);
+    void* GetComponentGameObject(void* component);
+    int GetComponentInt(void* component, const char* fieldName);
+    void SetComponentString(void* component, const char* fieldName, Unity::System_String* value);
+    void CallComponentMethodWithInt(void* component, const char* methodName, int value, Unity::System_String* text);
 }

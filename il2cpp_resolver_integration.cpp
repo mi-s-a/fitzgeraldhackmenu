@@ -30,6 +30,54 @@ namespace
 
 namespace fitzgeraldhackmenu
 {
+    std::vector<void*> FindIl2CppComponents(const char* typeName)
+    {
+        std::vector<void*> results;
+
+        auto objects = Unity::Object::FindObjectsOfType<Unity::CComponent>(typeName);
+        if (!objects)
+            return results;
+
+        for (uintptr_t i = 0; i < objects->m_uMaxLength; ++i)
+        {
+            Unity::CComponent* component = objects->m_pValues[i];
+            if (component)
+                results.push_back(component);
+        }
+
+        return results;
+    }
+
+    int GetComponentInt(void* component, const char* fieldName)
+    {
+        if (!component)
+            return 0;
+
+        return reinterpret_cast<IL2CPP::CClass*>(component)->GetMemberValue<int>(fieldName);
+    }
+
+    void SetComponentString(void* component, const char* fieldName, Unity::System_String* value)
+    {
+        if (!component)
+            return;
+
+        reinterpret_cast<IL2CPP::CClass*>(component)->SetMemberValue<Unity::System_String*>(fieldName, value);
+    }
+
+    void CallComponentMethodWithInt(void* component, const char* methodName, int value, Unity::System_String* text)
+    {
+        if (!component)
+            return;
+
+        void* args[] = { &value, text };
+        reinterpret_cast<IL2CPP::CClass*>(component)->CallMethod<void>(methodName, args);
+    }
+
+    void* GetComponentGameObject(void* component)
+    {
+        return reinterpret_cast<Unity::CComponent*>(component)->GetGameObject();
+    }
+
     bool InitializeIl2CppResolver(bool waitForGameAssembly, int maxSecondsWait)
     {
         g_resolverState = Il2CppResolverState::WaitingForGameAssembly;
