@@ -79,6 +79,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)third_party\IL2CPP_Resolver;$(ProjectDir)third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook;$(ProjectDir)third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\imgui;$(ProjectDir)third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\kiero;$(ProjectDir)third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\kiero\minhook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -100,6 +101,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)third_party\IL2CPP_Resolver;$(ProjectDir)third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook;$(ProjectDir)third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\imgui;$(ProjectDir)third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\kiero;$(ProjectDir)third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\kiero\minhook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -119,6 +121,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)third_party\IL2CPP_Resolver;$(ProjectDir)third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook;$(ProjectDir)third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\imgui;$(ProjectDir)third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\kiero;$(ProjectDir)third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\kiero\minhook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -140,6 +143,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)third_party\IL2CPP_Resolver;$(ProjectDir)third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook;$(ProjectDir)third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\imgui;$(ProjectDir)third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\kiero;$(ProjectDir)third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\kiero\minhook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -152,15 +156,56 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="debug_console.h" />
+    <ClInclude Include="dx11_imgui_hook.h" />
+    <ClInclude Include="imgui_overlay.h" />
+    <ClInclude Include="il2cpp_resolver_integration.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="debug_console.cpp" />
+    <ClCompile Include="dx11_imgui_hook.cpp" />
+    <ClCompile Include="imgui_overlay.cpp" />
+    <ClCompile Include="il2cpp_resolver_integration.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\imgui\imgui_impl_dx11.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\imgui\imgui_impl_win32.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\imgui\imgui.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\imgui\imgui_draw.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\imgui\imgui_widgets.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\kiero\kiero.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\kiero\minhook\src\buffer.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\kiero\minhook\src\hde\hde32.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\kiero\minhook\src\hde\hde64.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\kiero\minhook\src\hook.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\kiero\minhook\src\trampoline.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

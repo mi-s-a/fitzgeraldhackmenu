@@ -18,6 +18,18 @@
     <ClInclude Include="framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="debug_console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dx11_imgui_hook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_overlay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="il2cpp_resolver_integration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -26,7 +38,52 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="debug_console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dx11_imgui_hook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_overlay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="il2cpp_resolver_integration.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\imgui\imgui_impl_dx11.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\imgui\imgui_impl_win32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\imgui\imgui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\imgui\imgui_draw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\imgui\imgui_widgets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\kiero\kiero.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\kiero\minhook\src\buffer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\kiero\minhook\src\hde\hde32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\kiero\minhook\src\hde\hde64.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\kiero\minhook\src\hook.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\ImGui-DirectX-11-Kiero-Hook\ImGui DirectX 11 Kiero Hook\kiero\minhook\src\trampoline.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
