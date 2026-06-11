@@ -1,5 +1,6 @@
 #include "pch.h"
 
+#include "auth.h"
 #include "il2cpp_resolver_integration.h"
 
 #include <atomic>
@@ -41,6 +42,7 @@ namespace fitzgeraldhackmenu
 
         IL2CPP::Callback::Initialize();
         IL2CPP::Callback::OnUpdate::Add(reinterpret_cast<void*>(&OnIl2CppUpdate));
+        install();
 
         g_resolverState = Il2CppResolverState::Initialized;
         return true;
@@ -59,6 +61,11 @@ namespace fitzgeraldhackmenu
         {
             CloseHandle(thread);
         }
+    }
+
+    void* ResolveIl2CppMethodPointer(const char* className, const char* methodName, int argumentCount)
+    {
+        return IL2CPP::Class::Utils::GetMethodPointer(className, methodName, argumentCount);
     }
 
     Il2CppResolverState GetIl2CppResolverState()

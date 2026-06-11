@@ -14,6 +14,7 @@ namespace fitzgeraldhackmenu
 
     bool InitializeIl2CppResolver(bool waitForGameAssembly = true, int maxSecondsWait = 60);
     void StartIl2CppResolverInitialization();
+    void* ResolveIl2CppMethodPointer(const char* className, const char* methodName, int argumentCount = -1);
     Il2CppResolverState GetIl2CppResolverState();
     std::uint64_t GetIl2CppUpdateTickCount();
 }

@@ -7,6 +7,7 @@
 #include <imgui.h>
 #include <imgui_impl_dx11.h>
 #include <imgui_impl_win32.h>
+#include "auth.h"
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
@@ -26,6 +27,7 @@ namespace
         int placeholderi = 1;
         int menuKey = VK_INSERT;
         float placeholderf = 1.0f;
+        char accountIdInput[64] = "1";
     };
     MenuTab g_activeTab = MenuTab::Main;
     MenuSettings g_settings;
@@ -196,8 +198,13 @@ namespace
         ImGui::Checkbox("menu", &g_settings.enabled);
         ImGui::Checkbox("placeholder", &g_settings.placeholderb);
         ImGui::Spacing();
+        ImGui::TextUnformatted("id:");
+        if (ImGui::InputText("##acc_id", g_settings.accountIdInput, IM_ARRAYSIZE(g_settings.accountIdInput))){
+            fitzgeraldhackmenu::accountid = g_settings.accountIdInput;
+        }
+        ImGui::Spacing();
         if (ImGui::Button("resolveing", ImVec2(-1.0f, 0.0f))) {
-            
+
         }
         EndSection();
     }
