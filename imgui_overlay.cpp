@@ -193,7 +193,7 @@ namespace
         ImGui::Button(key == VK_INSERT ? "Insert" : "Unbound", ImVec2(100.0f, 0.0f));
     }
 
-    void renderplaceholder1() {
+    void maintab() {
         const float halfWidth = (ImGui::GetContentRegionAvail().x - ImGui::GetStyle().ItemSpacing.x) * 0.5f;
         BeginSection("main", ImVec2(halfWidth, 0.0f));
         ImGui::Checkbox("menu", &g_settings.enabled);
@@ -208,32 +208,39 @@ namespace
             Unity::System_String* yoStr = fitzgeraldhackmenu::NewIl2CppString("yo");
             auto objects = fitzgeraldhackmenu::FindIl2CppComponents("MultiPlayerEditableText");
 
-            for (void* component : objects)
+            // Check if the objects container itself is valid/not empty
+            if (!objects.empty())
             {
-                if (!component)
-                    continue;
-
-                int numMessages = fitzgeraldhackmenu::GetComponentInt(component, "numberOfSerializedMessages");
-
-                for (int i = 0; i < numMessages; i++)
+                for (void* component : objects)
                 {
-                    fitzgeraldhackmenu::CallComponentMethodWithInt(component, "NGCEMOGHDOD", i, yoStr);
-                }
+                    // Your existing null check for the individual component
+                    if (!component)
+                        continue;
 
-                fitzgeraldhackmenu::SetComponentString(component, "defaultMessage", yoStr);
+                    int numMessages = fitzgeraldhackmenu::GetComponentInt(component, "numberOfSerializedMessages");
+
+                    for (int i = 0; i < numMessages; i++)
+                    {
+                        // Optional: If 'yoStr' is a pointer type, you might want to wrap this 
+                        // loop in a null check for 'yoStr' as well.
+                        fitzgeraldhackmenu::CallComponentMethodWithInt(component, "NGCEMOGHDOD", i, yoStr);
+                    }
+
+                    fitzgeraldhackmenu::SetComponentString(component, "defaultMessage", yoStr);
+                }
             }
         }
         EndSection();
     }
 
-    void renderplaceholder2(){
+    void visualstab(){
         const float halfWidth = (ImGui::GetContentRegionAvail().x - ImGui::GetStyle().ItemSpacing.x) * 0.5f;
         BeginSection("visuals", ImVec2(halfWidth, 0.0f));
         ImGui::SliderFloat("placeholder", &g_settings.placeholderf, 20.0f, 500.0f, "%.0f px");
         EndSection();
     }
 
-    void renderplaceholder3() {
+    void misctab() {
         BeginSection("misc", ImVec2(0.0f, 0.0f));
         KeybindPlaceholder("key", g_settings.menuKey);
         EndSection();
@@ -264,13 +271,13 @@ namespace
         switch (g_activeTab)
         {
         case MenuTab::Main:
-            renderplaceholder1();
+            maintab();
             break;
         case MenuTab::Visuals:
-            renderplaceholder2();
+            visualstab();
             break;
         case MenuTab::Misc:
-            renderplaceholder3();
+            misctab();
             break;
         }
         ImGui::EndChild();
@@ -291,7 +298,7 @@ namespace fitzgeraldhackmenu {
         ImGui::CreateContext();
         ImGuiIO& io = ImGui::GetIO();
         io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-        io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\consola.ttf", 13.0f);
+        io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\tahoma.ttf", 15.0f);
         SetupStyle();
         if (!ImGui_ImplWin32_Init(hwnd)) {
             ImGui::DestroyContext();
